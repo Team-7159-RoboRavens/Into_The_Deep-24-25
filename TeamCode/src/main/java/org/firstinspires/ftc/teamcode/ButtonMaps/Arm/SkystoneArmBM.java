@@ -4,9 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
+import org.firstinspires.ftc.teamcode.ButtonMaps.SkystoneAbstractButtonMap;
 import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
+import org.firstinspires.ftc.teamcode.ComplexRobots.SkystoneRobot;
 
-public class SkystoneArmBM extends AbstractButtonMap {
+public class SkystoneArmBM extends SkystoneAbstractButtonMap {
     public static double intakePower = 0.5;
     public static double linearSlidesDownMultiplier = .4;
     public static double linearSlidesUpMultiplier = .4;
@@ -40,23 +42,23 @@ public class SkystoneArmBM extends AbstractButtonMap {
 
 
         @Override
-    public void loop(IntoTheDeepRobot robot, OpMode opMode) {
-        bucketMotorsAvgPostiion = (robot.bucketMotor1.getCurrentPosition() + robot.bucketMotor2.getCurrentPosition())/2;
+    public void loop(SkystoneRobot robot, OpMode opMode) {
+        bucketMotorsAvgPostiion = (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2;
 
         // Wrist Servo (elbow)
         if (opMode.gamepad2.a && !aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
-            robot.elbowServo.setPosition(1);
+            robot.clawRotationServo.setPosition(1);
             aIsPressed = !aIsPressed;
             elbowTimeDelay = System.currentTimeMillis();
         } else if (opMode.gamepad2.a && aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
-            robot.elbowServo.setPosition(0.5);
+            robot.clawRotationServo.setPosition(0.5);
             aIsPressed = !aIsPressed;
             elbowTimeDelay = System.currentTimeMillis();
         }
 
-        opMode.telemetry.addData("ES Position: ", robot.elbowServo.getPosition());
+        opMode.telemetry.addData("ES Position: ", robot.clawRotationServo.getPosition());
         // Bucket Motors (on triggers)
-        opMode.telemetry.addData("Bucket Encoder Avg: ", (robot.bucketMotor1.getCurrentPosition() + robot.bucketMotor2.getCurrentPosition())/2);
+        opMode.telemetry.addData("Bucket Encoder Avg: ", (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2);
 
 //        if (opMode.gamepad2.b && ((System.currentTimeMillis() - elbowServoTime) > timeDelay)) {
 //            // one servo to spin brush one servo to angle brush - the other other a elbow servo
@@ -64,70 +66,42 @@ public class SkystoneArmBM extends AbstractButtonMap {
 //            elbowServoTime = System.currentTimeMillis();
 //        }
 
-        // Spin the brush servo
-        if (Math.abs(opMode.gamepad2.right_stick_y) > .3 || Math.abs(opMode.gamepad2.left_stick_x)>.3 && ((System.currentTimeMillis() - brushServoTimeDelay) > 400)) {
-            brushServoTimeDelay = System.currentTimeMillis();
-            if (opMode.gamepad2.right_stick_y > .3) {
-                if (stageOfBrushServo < .9)
-                    stageOfBrushServo += .07;
-
-            }
-
-            if (opMode.gamepad2.right_stick_y < -.3) {
-                if (stageOfBrushServo > -.9)
-                    stageOfBrushServo -= .07;
-
-            }
-
-            if (opMode.gamepad2.right_stick_x > .3) {
-                if (stageOfBrushServo > -.9)
-                    stageOfBrushServo -= .07;
-            }
-
-            if (opMode.gamepad2.right_stick_x < -.3) {
-                if (stageOfBrushServo < .9)
-                    stageOfBrushServo += .07;
-            }
-
-            robot.brushServo.setPosition(stageOfBrushServo);
-        }
 
         // Bucket Motors
         if (opMode.gamepad2.left_trigger > 0.1) {
-                robot.bucketMotor1.setPower(-opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
-                robot.bucketMotor2.setPower(opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
+                robot.verticalSlideMotor1.setPower(-opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
+                robot.verticalSlideMotor2.setPower(opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
         } else if (opMode.gamepad2.right_trigger > 0.1) {
-                robot.bucketMotor1.setPower(opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
-                robot.bucketMotor2.setPower(-opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
+                robot.verticalSlideMotor1.setPower(opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
+                robot.verticalSlideMotor2.setPower(-opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
 
                 opMode.telemetry.addData("Bucket Encoder:", bucketMotorsAvgPostiion);
         } else {
-            robot.bucketMotor1.setPower(0);
-            robot.bucketMotor2.setPower(0);
+            robot.verticalSlideMotor1.setPower(0);
+            robot.verticalSlideMotor2.setPower(0);
         }
 
 
 
-//            Horizontal Slides Motor
-//        if (opMode.gamepad2.b && !bIsPressed && ((System.currentTimeMillis()- startTime) > timeDelay)) {
-//            robot.setMotorTo(robot.horizontalSlideMotor, -10, linearSlidesUpMultiplier);
-//            bIsPressed = !bIsPressed;
-//            horizontalSlideTime = System.currentTimeMillis();
-//        } else if (opMode.gamepad2.b && bIsPressed && ((System.currentTimeMillis()- horizontalSlideTime) > timeDelay)) {
-//            robot.setMotorTo(robot.horizontalSlideMotor, -2340, linearSlidesUpMultiplier);
-//            bIsPressed = !bIsPressed;
-//            startTime = System.currentTimeMillis();
-//        } else {
-//            robot.horizontalSlideMotor.setPower(0);
-//        }
-        // if (contact switch is not pressed)
-//        if (opMode.gamepad2.b && !bIsPressed) {
-//            robot.setMotorTo(robot.horizontalSlideMotor, 0, 1 * linearSlidesUpMultiplier);
-//            bIsPressed = !bIsPressed;
-//        } else if (/*opMode.gamepad2.left_stick_button*/opMode.gamepad2.b && bIsPressed) {
-//            robot.horizontalSlideMotor.setPower(-1 * linearSlidesDownMultiplier);
-//            bIsPressed = !bIsPressed;
-//        }
+//            Horizontal Slides Motor                                                                     // (Penis)
+        if (opMode.gamepad2.b && !bIsPressed && ((System.currentTimeMillis()- startTime) > timeDelay)) {
+            robot.setMotorTo(robot.horizontalSlideMotor, -10, linearSlidesUpMultiplier);
+            bIsPressed = !bIsPressed;
+            horizontalSlideTime = System.currentTimeMillis();
+        } else if (opMode.gamepad2.b && bIsPressed && ((System.currentTimeMillis()- horizontalSlideTime) > timeDelay)) {
+            robot.setMotorTo(robot.horizontalSlideMotor, -2340, linearSlidesUpMultiplier);
+            bIsPressed = !bIsPressed;
+            startTime = System.currentTimeMillis();
+        } else {
+            robot.horizontalSlideMotor.setPower(0);
+        }
+        if (opMode.gamepad2.b && !bIsPressed) {
+            robot.setMotorTo(robot.horizontalSlideMotor, 0, 1 * linearSlidesUpMultiplier);
+            bIsPressed = !bIsPressed;
+        } else if (/*opMode.gamepad2.left_stick_button*/opMode.gamepad2.b && bIsPressed) {
+            robot.horizontalSlideMotor.setPower(-1 * linearSlidesDownMultiplier);
+            bIsPressed = !bIsPressed;
+        }
 
         // Horizontal slides in/out
         int horizontalSlideMaxPos = -2200;
@@ -142,7 +116,6 @@ public class SkystoneArmBM extends AbstractButtonMap {
         } else if(opMode.gamepad2.dpad_down) { // Move horizontal slide in
              if(robot.horizontalSlideMotor.getCurrentPosition() < 0) {
                  robot.horizontalSlideMotor.setPower(.5);
-                 robot.elbowServo.setPosition(.5);
              } else{
                  robot.horizontalSlideMotor.setPower(0);
              }
@@ -153,36 +126,19 @@ public class SkystoneArmBM extends AbstractButtonMap {
         // opMode.telemetry.addLine("Horizontal Motor Encoder: ");
         opMode.telemetry.addData("Horz. Motor Encoder: ", robot.horizontalSlideMotor.getCurrentPosition());
 
-        // Bucket Servo (as horizontal slide extends)
-        if (robot.horizontalSlideMotor.getCurrentPosition() < (horizontalSlideMaxPos / 2.5)) {
-            robot.elbowServo.setPosition(1);
-        }
-
-        // Toggle Y (finger button)
-        if(opMode.gamepad2.y && !yIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) { // Closed
-            yIsPressed = true;
-            elbowTimeDelay = System.currentTimeMillis();
-            robot.fingerServo1.setPosition(-1);
-            robot.fingerServo2.setPosition(1);
-        } else if (opMode.gamepad2.y && yIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) { // Open
-            yIsPressed = false;
-            elbowTimeDelay = System.currentTimeMillis();
-            robot.fingerServo1.setPosition(0);
-            robot.fingerServo2.setPosition(0);
-        }
 
         // Specimen Claw
         if (opMode.gamepad2.x && !xIsPressed && ((System.currentTimeMillis() - startTime) > timeDelay)) {
             xIsPressed = !xIsPressed;
 
-            robot.specimenClaw.setPosition(0.5);
+            robot.clawServo.setPosition(0.5);
             specimenTime = System.currentTimeMillis();
 
             opMode.telemetry.addLine("Servo Closed");
         } else if (opMode.gamepad2.x && xIsPressed && ((System.currentTimeMillis() - specimenTime) > timeDelay)) {
             xIsPressed = !xIsPressed;
 
-            robot.specimenClaw.setPosition(1.1);
+            robot.clawServo.setPosition(1.1);
             startTime = System.currentTimeMillis();
 
             opMode.telemetry.addLine("Servo Open");

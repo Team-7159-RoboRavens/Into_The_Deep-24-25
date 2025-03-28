@@ -8,10 +8,12 @@ import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
 import org.firstinspires.ftc.teamcode.ButtonMaps.DPadControl;
 import org.firstinspires.ftc.teamcode.ButtonMaps.HolonomicDrive;
 import org.firstinspires.ftc.teamcode.ButtonMaps.MotorPowers;
+import org.firstinspires.ftc.teamcode.ButtonMaps.SkystoneAbstractButtonMap;
 import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
+import org.firstinspires.ftc.teamcode.ComplexRobots.SkystoneRobot;
 
 @Config
-public class SkystoneDriveBM extends AbstractButtonMap {
+public class SkystoneDriveBM extends SkystoneAbstractButtonMap {
     //TODO: Change back to private final when done with dash
     public static double triggerMultipler = 1;
     public static double dpadBumperMultiplier = 0.65;
@@ -28,7 +30,7 @@ public class SkystoneDriveBM extends AbstractButtonMap {
 
 
     @Override
-    public void loop(IntoTheDeepRobot robot, OpMode opMode) {
+    public void loop(SkystoneRobot robot, OpMode opMode) {
         mp = new MotorPowers(0);
         currentMotorPower = basePower;
 
