@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import org.firstinspires.ftc.robotcontroller.external.samples.SensorLimelight3A;
 
 import org.firstinspires.ftc.teamcode.ButtonMaps.MotorPowers;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
@@ -22,6 +23,7 @@ public class SkystoneRobot extends MecanumDrive {
     public final DcMotorEx verticalSlideMotor2;
     public final Servo clawServo;
     public final Servo clawRotationServo;
+    public final SensorLimelight3A limelight;
 
     public SkystoneRobot(HardwareMap hardwareMap, Pose2d pose) {
         super(hardwareMap, pose);
@@ -59,6 +61,9 @@ public class SkystoneRobot extends MecanumDrive {
         //Initialize Output Servo
         clawServo.scaleRange(0,0.35);
         clawRotationServo.setPosition(0);
+
+        //limelight
+        limelight = hardwareMap.get(SensorLimelight3A.class, "limelight");
 
     }
 
