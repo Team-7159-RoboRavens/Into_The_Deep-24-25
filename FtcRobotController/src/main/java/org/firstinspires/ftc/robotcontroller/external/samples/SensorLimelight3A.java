@@ -67,7 +67,6 @@ import java.util.List;
  *   below the name of the Limelight on the top level configuration screen.
  */
 @TeleOp(name = "Sensor: Limelight3A", group = "Sensor")
-@Disabled
 public class SensorLimelight3A extends LinearOpMode {
 
     private Limelight3A limelight;
@@ -109,6 +108,7 @@ public class SensorLimelight3A extends LinearOpMode {
                 telemetry.addData("LL Latency", captureLatency + targetingLatency);
                 telemetry.addData("Parse Latency", parseLatency);
                 telemetry.addData("PythonOutput", java.util.Arrays.toString(result.getPythonOutput()));
+                telemetry.addLine("Limelight Works!");
                 
                 if (result.isValid()) {
                     telemetry.addData("tx", result.getTx());

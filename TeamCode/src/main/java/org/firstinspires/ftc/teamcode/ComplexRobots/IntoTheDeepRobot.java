@@ -8,12 +8,15 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 
+import org.firstinspires.ftc.robotcontroller.external.samples.SensorLimelight3A;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.ButtonMaps.MotorPowers;
 
 
 @Config
 public class IntoTheDeepRobot extends MecanumDrive {
+
+
     enum Direction {
         UP,DOWN
     }
@@ -27,6 +30,7 @@ public class IntoTheDeepRobot extends MecanumDrive {
     public final Servo specimenClaw;
     public final Servo fingerServo1;
     public final Servo fingerServo2;
+    public final SensorLimelight3A limelight;
 
     public IntoTheDeepRobot(HardwareMap hardwareMap, Pose2d pose) {
         super(hardwareMap, pose);
@@ -65,6 +69,9 @@ public class IntoTheDeepRobot extends MecanumDrive {
         bucketServo = hardwareMap.get(Servo.class, "bucketServo");
         fingerServo1 =  hardwareMap.get(Servo.class, "fingerServo1");
         fingerServo2 =  hardwareMap.get(Servo.class, "fingerServo2");
+
+        //limelight
+        limelight = hardwareMap.get(SensorLimelight3A.class, "limelight");
 
         //Initialize Output Servo
         bucketServo.scaleRange(0,0.35);
