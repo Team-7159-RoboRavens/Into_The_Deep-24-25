@@ -3,36 +3,27 @@ package org.firstinspires.ftc.teamcode.ComplexRobots;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.CRServo;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.SensorLimelight3A;
-import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.ButtonMaps.MotorPowers;
+import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 
 @Config
-public class IntoTheDeepRobot extends MecanumDrive {
-
-
+public class SkystoneRobot extends MecanumDrive {
     enum Direction {
-        UP,DOWN
+        UP,DOWNw
     }
 
     public final DcMotorEx horizontalSlideMotor;
-    public final DcMotorEx bucketMotor1;
-    public final DcMotorEx bucketMotor2;
-    public final Servo brushServo;
-    public final Servo elbowServo;
-    public final Servo bucketServo;
-    public final Servo specimenClaw;
-    public final Servo fingerServo1;
-    public final Servo fingerServo2;
-    public final SensorLimelight3A limelight;
+    public final DcMotorEx verticalSlideMotor1;
+    public final DcMotorEx verticalSlideMotor2;
+    public final Servo clawServo;
+    public final Servo clawRotationServo;
 
-    public IntoTheDeepRobot(HardwareMap hardwareMap, Pose2d pose) {
+    public SkystoneRobot(HardwareMap hardwareMap, Pose2d pose) {
         super(hardwareMap, pose);
         //Linear Slide Motor
         horizontalSlideMotor = hardwareMap.get(DcMotorEx.class, "horizontalSlideMotor");
@@ -45,40 +36,29 @@ public class IntoTheDeepRobot extends MecanumDrive {
         horizontalSlideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //Bucket Motor
-        bucketMotor1 = hardwareMap.get(DcMotorEx.class, "bucketMotor1");
-        bucketMotor2 = hardwareMap.get(DcMotorEx.class, "bucketMotor2");
+        verticalSlideMotor1 = hardwareMap.get(DcMotorEx.class, "verticalSlide1");
+        verticalSlideMotor2 = hardwareMap.get(DcMotorEx.class, "verticalSlide2");
 
         //Setup
-        bucketMotor1.setDirection(DcMotor.Direction.FORWARD);
-        bucketMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        bucketMotor1.setTargetPositionTolerance(15);
-        bucketMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bucketMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bucketMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        verticalSlideMotor1.setDirection(DcMotor.Direction.FORWARD);
+        verticalSlideMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        verticalSlideMotor1.setTargetPositionTolerance(15);
+        verticalSlideMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        verticalSlideMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        bucketMotor2.setDirection(DcMotor.Direction.FORWARD);
-        bucketMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        bucketMotor2.setTargetPositionTolerance(15);
-        bucketMotor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bucketMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        verticalSlideMotor2.setDirection(DcMotor.Direction.FORWARD);
+        verticalSlideMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        verticalSlideMotor2.setTargetPositionTolerance(15);
+        verticalSlideMotor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        verticalSlideMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //Servos
-        brushServo = hardwareMap.get(Servo.class, "brushServo");
-        elbowServo = hardwareMap.get(Servo.class, "elbowServo");
-        specimenClaw = hardwareMap.get(Servo.class, "specimenClaw");
-        bucketServo = hardwareMap.get(Servo.class, "bucketServo");
-        fingerServo1 =  hardwareMap.get(Servo.class, "fingerServo1");
-        fingerServo2 =  hardwareMap.get(Servo.class, "fingerServo2");
-
-        //limelight
-        limelight = hardwareMap.get(SensorLimelight3A.class, "limelight");
+        clawServo = hardwareMap.get(Servo.class, "brushServo");
+        clawRotationServo = hardwareMap.get(Servo.class, "elbowServo");
 
         //Initialize Output Servo
-        bucketServo.scaleRange(0,0.35);
-        bucketServo.setPosition(0);
-        specimenClaw.scaleRange(-1,1);
-        specimenClaw.setPosition(1);
-        elbowServo.setPosition(0.5);
+        clawServo.scaleRange(0,0.35);
+        clawRotationServo.setPosition(0);
 
     }
 
@@ -92,20 +72,20 @@ public class IntoTheDeepRobot extends MecanumDrive {
         return new MotorPowers(0,0,0,0);
     }
     public void driveSlidesTo(int targetPosition, double motorPower, int direction){
-        int avgSlidesPos = (bucketMotor1.getCurrentPosition() + bucketMotor2.getCurrentPosition())/2;
+        int avgSlidesPos = (verticalSlideMotor1.getCurrentPosition() + verticalSlideMotor2.getCurrentPosition())/2;
         if(direction == -1) {
-            while (((bucketMotor1.getCurrentPosition() + bucketMotor2.getCurrentPosition()) / 2) >= targetPosition){
-                bucketMotor1.setPower(-motorPower);
-                bucketMotor2.setPower(motorPower);
+            while (((verticalSlideMotor1.getCurrentPosition() + verticalSlideMotor2.getCurrentPosition()) / 2) >= targetPosition){
+                verticalSlideMotor1.setPower(-motorPower);
+                verticalSlideMotor2.setPower(motorPower);
             }
         } else if(direction == 1) {
-            while (((bucketMotor1.getCurrentPosition() + bucketMotor2.getCurrentPosition()) / 2) <= targetPosition){
-                bucketMotor1.setPower(motorPower);
-                bucketMotor2.setPower(-motorPower);
+            while (((verticalSlideMotor1.getCurrentPosition() + verticalSlideMotor2.getCurrentPosition()) / 2) <= targetPosition){
+                verticalSlideMotor1.setPower(motorPower);
+                verticalSlideMotor2.setPower(-motorPower);
             }
         }
-        bucketMotor1.setPower(0);
-        bucketMotor2.setPower(0);
+        verticalSlideMotor1.setPower(0);
+        verticalSlideMotor2.setPower(0);
     }
 
     public MotorPowers pivotTurn(double currentMotorPower, boolean rightBumper, boolean leftBumper) {
