@@ -55,8 +55,8 @@ public class SkystoneRobot extends MecanumDrive {
         verticalSlideMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //Servos
-        clawServo = hardwareMap.get(Servo.class, "brushServo");
-        clawRotationServo = hardwareMap.get(Servo.class, "elbowServo");
+        clawServo = hardwareMap.get(Servo.class, "clawServo");
+        clawRotationServo = hardwareMap.get(Servo.class, "clawRotationServo");
 
         //Initialize Output Servo
         clawServo.scaleRange(0,0.35);
