@@ -152,7 +152,7 @@ public class SensorLimelight3A extends LinearOpMode {
                         else
                             colorResult = colorResults.get(temp);
                     }
-                    if (colorResult.getTargetArea() > .05)
+                    if (colorResult.getTargetXPixels() > 120)
                         telemetry.addData("Largest Yellow Object", String.valueOf(colorResult.getTargetXDegrees()), String.valueOf(colorResult.getTargetYDegrees()));
                 }
             } else {

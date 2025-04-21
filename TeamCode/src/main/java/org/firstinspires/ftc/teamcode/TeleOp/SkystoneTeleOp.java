@@ -4,9 +4,10 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+//import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
 import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
 import org.firstinspires.ftc.teamcode.ButtonMaps.Arm.ArianaArmBm;
-import org.firstinspires.ftc.teamcode.ButtonMaps.Arm.SkystoneArmBM;
+//import org.firstinspires.ftc.teamcode.ButtonMaps.Arm.SkystoneArmBM;
 import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.CommonDriveBM;
 import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.SkystoneDriveBM;
 import org.firstinspires.ftc.teamcode.ButtonMaps.SkystoneAbstractButtonMap;
@@ -20,7 +21,7 @@ public class SkystoneTeleOp extends OpMode {
 
     //Button Maps
     SkystoneAbstractButtonMap driveButtonMap;
-    SkystoneAbstractButtonMap slidesButtonMap;
+//    SkystoneAbstractButtonMap slidesButtonMap;
 
     @Override
     public void init() {
@@ -28,7 +29,7 @@ public class SkystoneTeleOp extends OpMode {
         telemetry.update();
         robot = new SkystoneRobot(hardwareMap, new Pose2d(0,0,0));
         driveButtonMap = new SkystoneDriveBM();
-        slidesButtonMap = new SkystoneArmBM();
+//        slidesButtonMap = new SkystoneArmBM();
         telemetry.addLine("Ready.");
         telemetry.update();
     }
@@ -36,7 +37,7 @@ public class SkystoneTeleOp extends OpMode {
     @Override
     public void loop() {
         driveButtonMap.loop(robot, this);
-        slidesButtonMap.loop(robot, this);
+//        slidesButtonMap.loop(robot, this);
         telemetry.update();
     }
 }
