@@ -21,7 +21,7 @@ public class HolonomicDrive {
         double backLeftPower = maxMotorPower*((rotY - rotX + rotate) / denominator);
         double frontRightPower = maxMotorPower*((rotY - rotX - rotate) / denominator);
         double backRightPower = maxMotorPower*((rotY + rotX - rotate) / denominator);
-//        frontLeftPower *= .5; backLeftPower *= .5; frontRightPower *= .5; backRightPower *= .5;
+        frontLeftPower *= .5; backLeftPower *= .5; frontRightPower *= .5; backRightPower *= .5;
         return new MotorPowers(frontLeftPower, frontRightPower, backLeftPower, backRightPower);
     }
 
@@ -37,6 +37,6 @@ public class HolonomicDrive {
         double frontRightPower = (y - x) / denominator;
         double backRightPower = (y + x) / denominator;
 
-        return new MotorPowers(frontLeftPower, -frontRightPower, -backLeftPower, backRightPower);
+        return new MotorPowers(frontLeftPower, frontRightPower, backLeftPower, backRightPower);
     }
 }

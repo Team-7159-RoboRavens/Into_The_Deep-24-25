@@ -1,85 +1,85 @@
-//package org.firstinspires.ftc.teamcode.ButtonMaps.Arm;
+package org.firstinspires.ftc.teamcode.ButtonMaps.Arm;
 //
-//import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-//import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 //
-//import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
+import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
 import org.firstinspires.ftc.teamcode.ButtonMaps.SkystoneAbstractButtonMap;
-//import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
-//import org.firstinspires.ftc.teamcode.ComplexRobots.SkystoneRobot;
+import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
+import org.firstinspires.ftc.teamcode.ComplexRobots.SkystoneRobot;
 
-//public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
-//    public static double intakePower = 0.5;
-//    public static double linearSlidesDownMultiplier = .4;
-//    public static double linearSlidesUpMultiplier = .4;
-//    public static double bucketMotor1Multiplier = 0.85;
-//    private ElapsedTime et = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
-//    private long specimenTime;
-//    private long startTime = System.currentTimeMillis();
-//    private long horizontalSlideTime;
-//    private int timeDelay = 500;
-//    private long elbowTimeDelay = System.currentTimeMillis();
-//    private double intakeOutTime = 0;
-//    private long sampleServoTime = System.currentTimeMillis();
-//    private long brushServoTimeDelay = 250;
-//    private long elbowServoTime = System.currentTimeMillis();
+public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
+    public static double intakePower = 0.5;
+    public static double linearSlidesDownMultiplier = .4;
+    public static double linearSlidesUpMultiplier = .4;
+    public static double bucketMotor1Multiplier = 0.85;
+    private ElapsedTime et = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+    private long specimenTime;
+    private long startTime = System.currentTimeMillis();
+    private long horizontalSlideTime;
+    private int timeDelay = 500;
+    private long elbowTimeDelay = System.currentTimeMillis();
+    private double intakeOutTime = 0;
+    private long sampleServoTime = System.currentTimeMillis();
+    private long brushServoTimeDelay = 250;
+    private long elbowServoTime = System.currentTimeMillis();
 //
 //
 //    //Boolean Toggle Memory
-//    boolean aIsPressed = false;
-//    static int STOPPED = 0;
-//    static int FORWARD = 1;
-//    static int REVERSE = 2;
-//    int yState = STOPPED;
-//    boolean yIsPressed = false;
-//    boolean bIsPressed = false;
-//    boolean rbIsPressed = false;
-//    boolean lbIsPressed = false;
-//    boolean xIsPressed = false;
-//    double stageOfBrushServo = 0;
-//
-//    int bucketMotorsAvgPostiion;
-//
-//
+    boolean aIsPressed = false;
+    static int STOPPED = 0;
+    static int FORWARD = 1;
+    static int REVERSE = 2;
+    int yState = STOPPED;
+    boolean yIsPressed = false;
+    boolean bIsPressed = false;
+    boolean rbIsPressed = false;
+    boolean lbIsPressed = false;
+    boolean xIsPressed = false;
+    double stageOfBrushServo = 0;
+
+    int bucketMotorsAvgPostiion;
+
+
 //        @Override
-//    public void loop(SkystoneRobot robot, OpMode opMode) {
-//        bucketMotorsAvgPostiion = (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2;
-//
-//        // Wrist Servo (elbow)
-//        if (opMode.gamepad2.a && !aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
-//            robot.clawRotationServo.setPosition(1);
-//            aIsPressed = !aIsPressed;
-//            elbowTimeDelay = System.currentTimeMillis();
-//        } else if (opMode.gamepad2.a && aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
-//            robot.clawRotationServo.setPosition(0.5);
-//            aIsPressed = !aIsPressed;
-//            elbowTimeDelay = System.currentTimeMillis();
-//        }
-//
-//        opMode.telemetry.addData("ES Position: ", robot.clawRotationServo.getPosition());
-//        // Bucket Motors (on triggers)
-//        opMode.telemetry.addData("Bucket Encoder Avg: ", (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2);
-//
-////        if (opMode.gamepad2.b && ((System.currentTimeMillis() - elbowServoTime) > timeDelay)) {
-//            // one servo to spin brush one servo to angle brush - the other other a elbow servo
-//            robot.elbowServo.setPosition(0.8);
-//            elbowServoTime = System.currentTimeMillis();
-//        }
+    public void loop(SkystoneRobot robot, OpMode opMode) {
+        bucketMotorsAvgPostiion = (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2;
+
+        // Wrist Servo (elbow)
+        if (opMode.gamepad2.a && !aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
+            robot.clawRotationServo.setPosition(1);
+            aIsPressed = !aIsPressed;
+            elbowTimeDelay = System.currentTimeMillis();
+        } else if (opMode.gamepad2.a && aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
+            robot.clawRotationServo.setPosition(0.5);
+            aIsPressed = !aIsPressed;
+            elbowTimeDelay = System.currentTimeMillis();
+        }
+
+        opMode.telemetry.addData("ES Position: ", robot.clawRotationServo.getPosition());
+        // Bucket Motors (on triggers)
+        opMode.telemetry.addData("Bucket Encoder Avg: ", (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2);
+
+        if (opMode.gamepad2.b && ((System.currentTimeMillis() - elbowServoTime) > timeDelay)) {
+            // one servo to spin brush one servo to angle brush - the other other a elbow servo
+            robot.clawRotationServo.setPosition(0.8);
+            elbowServoTime = System.currentTimeMillis();
+        }
 
 //
 //        // Bucket Motors
-//        if (opMode.gamepad2.left_trigger > 0.1) {
-//                robot.verticalSlideMotor1.setPower(-opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
-//                robot.verticalSlideMotor2.setPower(opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
-//        } else if (opMode.gamepad2.right_trigger > 0.1) {
-//                robot.verticalSlideMotor1.setPower(opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
-//                robot.verticalSlideMotor2.setPower(-opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
-//
-//                opMode.telemetry.addData("Bucket Encoder:", bucketMotorsAvgPostiion);
-//        } else {
-//            robot.verticalSlideMotor1.setPower(0);
-//            robot.verticalSlideMotor2.setPower(0);
-//        }
+        if (opMode.gamepad2.left_trigger > 0.1) {
+                robot.verticalSlideMotor1.setPower(-opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
+                robot.verticalSlideMotor2.setPower(opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
+        } else if (opMode.gamepad2.right_trigger > 0.1) {
+                robot.verticalSlideMotor1.setPower(opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
+                robot.verticalSlideMotor2.setPower(-opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
+
+                opMode.telemetry.addData("Bucket Encoder:", bucketMotorsAvgPostiion);
+        } else {
+            robot.verticalSlideMotor1.setPower(0);
+            robot.verticalSlideMotor2.setPower(0);
+        }
 //
 //
 //
@@ -128,22 +128,24 @@ import org.firstinspires.ftc.teamcode.ButtonMaps.SkystoneAbstractButtonMap;
 //
 //
 //        // Specimen Claw
-//        if (opMode.gamepad2.x && !xIsPressed && ((System.currentTimeMillis() - startTime) > timeDelay)) {
-//            xIsPressed = !xIsPressed;
-//
-//            robot.clawServo.setPosition(0.5);
-//            specimenTime = System.currentTimeMillis();
-//
-//            opMode.telemetry.addLine("Servo Closed");
-//        } else if (opMode.gamepad2.x && xIsPressed && ((System.currentTimeMillis() - specimenTime) > timeDelay)) {
-//            xIsPressed = !xIsPressed;
-//
-//            robot.clawServo.setPosition(1.1);
-//            startTime = System.currentTimeMillis();
-//
-//            opMode.telemetry.addLine("Servo Open");
-//        }
-//
-//        opMode.telemetry.update();
-//    }
-//}
+        if (opMode.gamepad2.x && !xIsPressed && ((System.currentTimeMillis() - startTime) > timeDelay)) {
+            xIsPressed = !xIsPressed;
+
+            robot.clawServo.setPosition(0.5);
+            robot.clawServo2.setPosition(-0.5);
+            specimenTime = System.currentTimeMillis();
+
+            opMode.telemetry.addLine("Servo Closed");
+        } else if (opMode.gamepad2.x && xIsPressed && ((System.currentTimeMillis() - specimenTime) > timeDelay)) {
+            xIsPressed = !xIsPressed;
+
+            robot.clawServo.setPosition(1.1);
+            robot.clawServo2.setPosition(-1.1);
+            startTime = System.currentTimeMillis();
+
+            opMode.telemetry.addLine("Servo Open");
+        }
+
+        opMode.telemetry.update();
+    }
+}
