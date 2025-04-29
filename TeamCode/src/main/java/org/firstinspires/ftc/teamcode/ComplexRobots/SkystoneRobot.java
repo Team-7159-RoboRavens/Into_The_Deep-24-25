@@ -18,7 +18,7 @@ public class SkystoneRobot extends MecanumDrive {
         UP,DOWNw
     }
 
-    public final DcMotorEx horizontalSlideMotor;
+//    public final DcMotorEx horizontalSlideMotor;
     public final DcMotorEx verticalSlideMotor1;
     public final DcMotorEx verticalSlideMotor2;
     public final Servo clawServo;
