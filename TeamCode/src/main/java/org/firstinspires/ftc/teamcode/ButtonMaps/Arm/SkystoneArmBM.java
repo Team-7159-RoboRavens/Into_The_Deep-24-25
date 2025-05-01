@@ -46,25 +46,25 @@ public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
         bucketMotorsAvgPostiion = (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2;
 
         // Wrist Servo (elbow)
-        if (opMode.gamepad2.a && !aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
-            robot.clawRotationServo.setPosition(1);
-            aIsPressed = !aIsPressed;
-            elbowTimeDelay = System.currentTimeMillis();
-        } else if (opMode.gamepad2.a && aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
-            robot.clawRotationServo.setPosition(0.5);
-            aIsPressed = !aIsPressed;
-            elbowTimeDelay = System.currentTimeMillis();
-        }
-
-        opMode.telemetry.addData("ES Position: ", robot.clawRotationServo.getPosition());
-        // Bucket Motors (on triggers)
-        opMode.telemetry.addData("Bucket Encoder Avg: ", (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2);
-
-        if (opMode.gamepad2.b && ((System.currentTimeMillis() - elbowServoTime) > timeDelay)) {
-            // one servo to spin brush one servo to angle brush - the other other a elbow servo
-            robot.clawRotationServo.setPosition(0.8);
-            elbowServoTime = System.currentTimeMillis();
-        }
+//        if (opMode.gamepad2.a && !aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
+//            robot.clawRotationServo.setPosition(1);
+//            aIsPressed = !aIsPressed;
+//            elbowTimeDelay = System.currentTimeMillis();
+//        } else if (opMode.gamepad2.a && aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
+//            robot.clawRotationServo.setPosition(0.5);
+//            aIsPressed = !aIsPressed;
+//            elbowTimeDelay = System.currentTimeMillis();
+//        }
+//
+//        opMode.telemetry.addData("ES Position: ", robot.clawRotationServo.getPosition());
+//        // Bucket Motors (on triggers)
+//        opMode.telemetry.addData("Bucket Encoder Avg: ", (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2);
+//
+//        if (opMode.gamepad2.b && ((System.currentTimeMillis() - elbowServoTime) > timeDelay)) {
+//            // one servo to spin brush one servo to angle brush - the other other a elbow servo
+//            robot.clawRotationServo.setPosition(0.8);
+//            elbowServoTime = System.currentTimeMillis();
+//        }
 
 //
 //        // Bucket Motors

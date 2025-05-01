@@ -23,7 +23,7 @@ public class SkystoneRobot extends MecanumDrive {
     public final DcMotorEx verticalSlideMotor2;
     public final Servo clawServo;
     public final Servo clawServo2;
-    public final Servo clawRotationServo;
+//    public final Servo clawRotationServo;
 //    public final SensorLimelight3A limelight;
 
     public SkystoneRobot(HardwareMap hardwareMap, Pose2d pose) {
@@ -58,12 +58,12 @@ public class SkystoneRobot extends MecanumDrive {
         //Servos
         clawServo = hardwareMap.get(Servo.class, "clawServo");
         clawServo2 = hardwareMap.get(Servo.class, "clawServo2");
-        clawRotationServo = hardwareMap.get(Servo.class, "clawRotationServo");
+//        clawRotationServo = hardwareMap.get(Servo.class, "clawRotationServo");
 
 //        //Initialize Output Servo
         clawServo.scaleRange(0,0.35);
         clawServo2.scaleRange(0,-0.35);
-        clawRotationServo.setPosition(0);
+//        clawRotationServo.setPosition(0);
 //
 //        //limelight
 //        limelight = hardwareMap.get(SensorLimelight3A.class, "limelight");
