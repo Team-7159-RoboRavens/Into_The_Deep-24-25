@@ -19,8 +19,8 @@ public class SkystoneRobot extends MecanumDrive {
     }
 
 //    public final DcMotorEx horizontalSlideMotor;
-    public final DcMotorEx verticalSlideMotor1;
-    public final DcMotorEx verticalSlideMotor2;
+//    public final DcMotorEx verticalSlideMotor1;
+//    public final DcMotorEx verticalSlideMotor2;
     public final Servo clawServo;
     public final Servo clawServo2;
 //    public final Servo clawRotationServo;
@@ -39,21 +39,21 @@ public class SkystoneRobot extends MecanumDrive {
 //        horizontalSlideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //
 //        //Bucket Motor
-        verticalSlideMotor1 = hardwareMap.get(DcMotorEx.class, "verticalSlide1");
-        verticalSlideMotor2 = hardwareMap.get(DcMotorEx.class, "verticalSlide2");
+//        verticalSlideMotor1 = hardwareMap.get(DcMotorEx.class, "verticalSlide1");
+//        verticalSlideMotor2 = hardwareMap.get(DcMotorEx.class, "verticalSlide2");
+////
+////        //Setup
+//        verticalSlideMotor1.setDirection(DcMotor.Direction.FORWARD);
+//        verticalSlideMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        verticalSlideMotor1.setTargetPositionTolerance(15);
+//        verticalSlideMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        verticalSlideMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //
-//        //Setup
-        verticalSlideMotor1.setDirection(DcMotor.Direction.FORWARD);
-        verticalSlideMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        verticalSlideMotor1.setTargetPositionTolerance(15);
-        verticalSlideMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        verticalSlideMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        verticalSlideMotor2.setDirection(DcMotor.Direction.FORWARD);
-        verticalSlideMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        verticalSlideMotor2.setTargetPositionTolerance(15);
-        verticalSlideMotor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        verticalSlideMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        verticalSlideMotor2.setDirection(DcMotor.Direction.FORWARD);
+//        verticalSlideMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        verticalSlideMotor2.setTargetPositionTolerance(15);
+//        verticalSlideMotor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        verticalSlideMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //
         //Servos
         clawServo = hardwareMap.get(Servo.class, "clawServo");
@@ -61,8 +61,7 @@ public class SkystoneRobot extends MecanumDrive {
 //        clawRotationServo = hardwareMap.get(Servo.class, "clawRotationServo");
 
 //        //Initialize Output Servo
-        clawServo.scaleRange(0,0.35);
-        clawServo2.scaleRange(0,-0.35);
+       
 //        clawRotationServo.setPosition(0);
 //
 //        //limelight
@@ -79,22 +78,22 @@ public class SkystoneRobot extends MecanumDrive {
     public MotorPowers setAllMotorPowers(int i) {
         return new MotorPowers(0,0,0,0);
     }
-    public void driveSlidesTo(int targetPosition, double motorPower, int direction){
-        int avgSlidesPos = (verticalSlideMotor1.getCurrentPosition() + verticalSlideMotor2.getCurrentPosition())/2;
-        if(direction == -1) {
-            while (((verticalSlideMotor1.getCurrentPosition() + verticalSlideMotor2.getCurrentPosition()) / 2) >= targetPosition){
-                verticalSlideMotor1.setPower(-motorPower);
-                verticalSlideMotor2.setPower(motorPower);
-            }
-        } else if(direction == 1) {
-            while (((verticalSlideMotor1.getCurrentPosition() + verticalSlideMotor2.getCurrentPosition()) / 2) <= targetPosition){
-                verticalSlideMotor1.setPower(motorPower);
-                verticalSlideMotor2.setPower(-motorPower);
-            }
-        }
-        verticalSlideMotor1.setPower(0);
-        verticalSlideMotor2.setPower(0);
-    }
+//    public void driveSlidesTo(int targetPosition, double motorPower, int direction){
+//        int avgSlidesPos = (verticalSlideMotor1.getCurrentPosition() + verticalSlideMotor2.getCurrentPosition())/2;
+//        if(direction == -1) {
+//            while (((verticalSlideMotor1.getCurrentPosition() + verticalSlideMotor2.getCurrentPosition()) / 2) >= targetPosition){
+//                verticalSlideMotor1.setPower(-motorPower);
+//                verticalSlideMotor2.setPower(motorPower);
+//            }
+//        } else if(direction == 1) {
+//            while (((verticalSlideMotor1.getCurrentPosition() + verticalSlideMotor2.getCurrentPosition()) / 2) <= targetPosition){
+//                verticalSlideMotor1.setPower(motorPower);
+//                verticalSlideMotor2.setPower(-motorPower);
+//            }
+//        }
+//        verticalSlideMotor1.setPower(0);
+//        verticalSlideMotor2.setPower(0);
+//    }
 
     public MotorPowers pivotTurn(double currentMotorPower, boolean rightBumper, boolean leftBumper) {
         double rightTopMotorPower = currentMotorPower;

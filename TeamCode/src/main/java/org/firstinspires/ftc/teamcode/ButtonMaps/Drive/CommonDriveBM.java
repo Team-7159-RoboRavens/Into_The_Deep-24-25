@@ -124,7 +124,6 @@ public class CommonDriveBM extends AbstractButtonMap {
                     mp.rightBack * slowStrafeMultiplier);
             opMode.telemetry.addLine("Slow Multiplier Active!");
         }
-
         mp = new MotorPowers(-mp.leftFront,
                 mp.rightFront,
                 mp.leftBack,
