@@ -41,7 +41,7 @@ public class TrikeDriveBM extends TrikeAbstractButtonMap {
             opMode.telemetry.addData("Turning: ", opMode.gamepad1.left_stick_x);
             opMode.telemetry.addData("Current Position: ", robot.turningServo.getPosition());
 
-        }d
+        }
 
         opMode.telemetry.update();
         robot.setMotorPowers(mp);
