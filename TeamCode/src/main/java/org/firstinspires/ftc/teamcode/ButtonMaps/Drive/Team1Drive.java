@@ -47,26 +47,26 @@ else if (opMode.gamepad1.dpad_down) {
 //TurnRight
 
         else if (opMode.gamepad1.b) {
-            mp = new MotorPowers(movementMulti, -movementMulti, movementMulti, -movementMulti);
+            mp = new MotorPowers(movementMulti, movementMulti, -movementMulti, -movementMulti);
         }
 
 //TurnLeft
 
         else if (opMode.gamepad1.x) {
-            mp = new MotorPowers(-movementMulti, movementMulti, -movementMulti, movementMulti);
+            mp = new MotorPowers(-movementMulti, -movementMulti, movementMulti, movementMulti);
         }
 //ServoUp
 
         if (opMode.gamepad1.right_trigger > 0.2){
-            robot.servo1.setPosition (0);
+            robot.servo1.setPosition (1);
         }
 //ServeoDown
         else if (opMode.gamepad1.left_trigger > 0.2){
-            robot.servo1.setPosition (0.4);
+            robot.servo1.setPosition (-0.5);
         }
 //Servo: robot.Servo1.setPosition(1 through -1);
 
-
+        mp = new MotorPowers(mp.leftFront,mp.rightFront,-mp.leftBack,-mp.rightBack);
 
 
         opMode.telemetry.update();

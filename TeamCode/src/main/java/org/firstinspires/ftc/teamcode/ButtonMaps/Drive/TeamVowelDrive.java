@@ -59,7 +59,7 @@ public class TeamVowelDrive extends AbstractButtonMap {
             Servo:
             robot.servo1.setPosition(-0.5);
         }
-
+        mp = new MotorPowers(-mp.leftFront,-mp.rightFront,-mp.leftBack,mp.rightBack);
         opMode.telemetry.update();
         robot.setMotorPowers(mp);
     }
