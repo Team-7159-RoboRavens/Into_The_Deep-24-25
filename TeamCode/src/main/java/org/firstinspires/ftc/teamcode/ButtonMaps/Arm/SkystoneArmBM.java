@@ -43,7 +43,7 @@ public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
 
 //        @Override
     public void loop(SkystoneRobot robot, OpMode opMode) {
-        bucketMotorsAvgPostiion = (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2;
+//        bucketMotorsAvgPostiion = (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2;
 
         // Wrist Servo (elbow)
 //        if (opMode.gamepad2.a && !aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
@@ -68,19 +68,19 @@ public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
 
 //
 //        // Bucket Motors
-        if (opMode.gamepad2.left_trigger > 0.1) {
-                robot.verticalSlideMotor1.setPower(-opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
-                robot.verticalSlideMotor2.setPower(opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
-        } else if (opMode.gamepad2.right_trigger > 0.1) {
-                robot.verticalSlideMotor1.setPower(opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
-                robot.verticalSlideMotor2.setPower(-opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
-
-                opMode.telemetry.addData("Bucket Encoder:", bucketMotorsAvgPostiion);
-        } else {
-            robot.verticalSlideMotor1.setPower(0);
-            robot.verticalSlideMotor2.setPower(0);
-        }
+//        if (opMode.gamepad2.left_trigger > 0.1) {
+//                robot.verticalSlideMotor1.setPower(-opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
+//                robot.verticalSlideMotor2.setPower(opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
+//        } else if (opMode.gamepad2.right_trigger > 0.1) {
+//                robot.verticalSlideMotor1.setPower(opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
+//                robot.verticalSlideMotor2.setPower(-opMode.gamepad2.right_trigger * linearSlidesDownMultiplier * 1);
 //
+//                opMode.telemetry.addData("Bucket Encoder:", bucketMotorsAvgPostiion);
+//        } else {
+//            robot.verticalSlideMotor1.setPower(0);
+//            robot.verticalSlideMotor2.setPower(0);
+//        }
+////
 //
 //
 ////            Horizontal Slides Motor                                                                     // (Penis)

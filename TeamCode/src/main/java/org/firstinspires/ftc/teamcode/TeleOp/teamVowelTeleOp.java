@@ -5,13 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
-import org.firstinspires.ftc.teamcode.ButtonMaps.Arm.ArianaArmBm;
-import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.CommonDriveBM;
-import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.TestDrive;
+import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.Team1Drive;
+import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.TeamVowelDrive;
 import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
 
-@TeleOp(name="testTeleOpDrive")
-public class testTeleOp extends OpMode {
+@TeleOp(name="vowelTeamTeleOp")
+public class teamVowelTeleOp extends OpMode {
     //Global Variables
     IntoTheDeepRobot robot;
 
@@ -23,7 +22,7 @@ public class testTeleOp extends OpMode {
         telemetry.addLine("Initializing, please wait...");
         telemetry.update();
         robot = new IntoTheDeepRobot(hardwareMap, new Pose2d(0, 0, 0));
-        driveButtonMap = new TestDrive();
+        driveButtonMap = new TeamVowelDrive();
         telemetry.addLine("Ready.");
         telemetry.update();
     }

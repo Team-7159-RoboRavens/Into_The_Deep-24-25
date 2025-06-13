@@ -4,24 +4,24 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.TrikeDriveBM;
-import org.firstinspires.ftc.teamcode.ButtonMaps.TrikeAbstractButtonMap;
-import org.firstinspires.ftc.teamcode.ComplexRobots.TrikeRobot;
+import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
+import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.Team1Drive;
+import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
 
-@TeleOp(name="trikeTeleOp")
-public class trikeTeleOp extends OpMode {
+@TeleOp(name="team1TeleOp")
+public class team1TeleOp extends OpMode {
     //Global Variables
-    TrikeRobot robot;
+    IntoTheDeepRobot robot;
 
     //Button Maps
-    TrikeAbstractButtonMap driveButtonMap;
+    AbstractButtonMap driveButtonMap;
 
     @Override
     public void init() {
         telemetry.addLine("Initializing, please wait...");
         telemetry.update();
-        robot = new TrikeRobot(hardwareMap, new Pose2d(0, 0, 0));
-        driveButtonMap = new TrikeDriveBM();
+        robot = new IntoTheDeepRobot(hardwareMap, new Pose2d(0, 0, 0));
+        driveButtonMap = new Team1Drive();
         telemetry.addLine("Ready.");
         telemetry.update();
     }
