@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.ButtonMaps.MotorPowers;
 import org.firstinspires.ftc.teamcode.ButtonMaps.SkystoneAbstractButtonMap;
 import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
 import org.firstinspires.ftc.teamcode.ComplexRobots.SkystoneRobot;
+import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 @Config
 public class SkystoneDriveBM extends SkystoneAbstractButtonMap {
@@ -26,7 +27,7 @@ public class SkystoneDriveBM extends SkystoneAbstractButtonMap {
     private boolean combineWithPivotTurn = false;
 
     private double currentMotorPower;
-    private MotorPowers mp;
+    private MotorPowers mp;// = new MotorPowers(0);
 
 
     @Override
@@ -34,7 +35,7 @@ public class SkystoneDriveBM extends SkystoneAbstractButtonMap {
         mp = new MotorPowers(0);
         currentMotorPower = basePower;
 
-
+        opMode.telemetry.addLine("encoders:" + robot.leftFront.getCurrentPosition() + " " + robot.rightFront.getCurrentPosition() + " " + robot.leftBack.getCurrentPosition() + " " + robot.rightBack.getCurrentPosition() + " ");
 
         //Dpad strafe using dpad
         MotorPowers dpadMotorPowers = DPadControl.dpadStrafe(opMode.gamepad1, currentMotorPower);
@@ -43,7 +44,7 @@ public class SkystoneDriveBM extends SkystoneAbstractButtonMap {
             opMode.telemetry.addLine("DPad Active!");
             opMode.telemetry.update();
         }
-
+//change
         //Field-Oriented Driving using left joystick
 //        MotorPowers fodMotorPowers = FieldOrientedDrive.fieldOrientedDrive(opMode.gamepad1, robot.lazyImu.get(), opMode.gamepad1.b ? fodMultiplier*slowStrafeMultiplier : fodMultiplier);
 //        if (fodMotorPowers.isNotZero()) {
@@ -90,10 +91,10 @@ public class SkystoneDriveBM extends SkystoneAbstractButtonMap {
         //Backward
         else if (opMode.gamepad1.left_trigger > 0.1) {
             //Backward
-            mp = new MotorPowers(-opMode.gamepad1.left_trigger * triggerMultipler,
-                    -opMode.gamepad1.left_trigger * triggerMultipler,
-                    -opMode.gamepad1.left_trigger * triggerMultipler,
-                    -opMode.gamepad1.left_trigger * triggerMultipler);
+            mp = new MotorPowers(opMode.gamepad1.left_trigger * triggerMultipler,
+                    opMode.gamepad1.left_trigger * triggerMultipler,
+                    opMode.gamepad1.left_trigger * triggerMultipler,
+                    opMode.gamepad1.left_trigger * triggerMultipler);
             opMode.telemetry.addLine("Trigger Left (backward) active!");
             opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.left_trigger);
         }
@@ -101,14 +102,14 @@ public class SkystoneDriveBM extends SkystoneAbstractButtonMap {
         /*
          * Button Y - Complete break
          */
-//        if (opMode.gamepad1.y) {
-//            robot.setAllMotorPowers(0);
-//            robot.leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//            robot.leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//            robot.rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//            robot.rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//            opMode.telemetry.addLine("Brake!!");
-//        }
+        if (opMode.gamepad1.y) {
+            robot.setAllMotorPowers(0);
+            robot.leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            robot.leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            robot.rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            robot.rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            opMode.telemetry.addLine("Brake!!");
+        }
         //Slow Strafe Button
 
         //test by putting at beginning
@@ -120,10 +121,10 @@ public class SkystoneDriveBM extends SkystoneAbstractButtonMap {
             opMode.telemetry.addLine("Slow Multiplier Active!");
         }
 
-//        mp = new MotorPowers(mp.leftFront,
-//                mp.rightFront,
-//                mp.leftBack,
-//                mp.rightBack);
+        mp = new MotorPowers(mp.leftFront,
+                mp.rightFront,
+                mp.leftBack,
+                mp.rightBack);
         opMode.telemetry.update();
         robot.setMotorPowers(mp);
     }

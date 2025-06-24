@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode.ButtonMaps.Arm;
-//
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-//
+
 import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
 import org.firstinspires.ftc.teamcode.ButtonMaps.SkystoneAbstractButtonMap;
 import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
 import org.firstinspires.ftc.teamcode.ComplexRobots.SkystoneRobot;
 
-public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
+public class SkystoneArmBM extends SkystoneAbstractButtonMap {
     public static double intakePower = 0.5;
     public static double linearSlidesDownMultiplier = .4;
     public static double linearSlidesUpMultiplier = .4;
@@ -23,7 +23,7 @@ public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
     private long sampleServoTime = System.currentTimeMillis();
     private long brushServoTimeDelay = 250;
     private long elbowServoTime = System.currentTimeMillis();
-//
+
 //
 //    //Boolean Toggle Memory
     boolean aIsPressed = false;
@@ -37,15 +37,15 @@ public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
     boolean lbIsPressed = false;
     boolean xIsPressed = false;
     double stageOfBrushServo = 0;
-
+//
     int bucketMotorsAvgPostiion;
-
-
+//
+//
 //        @Override
     public void loop(SkystoneRobot robot, OpMode opMode) {
 //        bucketMotorsAvgPostiion = (robot.verticalSlideMotor1.getCurrentPosition() + robot.verticalSlideMotor2.getCurrentPosition())/2;
-
-        // Wrist Servo (elbow)
+////
+////        // Wrist Servo (elbow)
 //        if (opMode.gamepad2.a && !aIsPressed && ((System.currentTimeMillis() - elbowTimeDelay) > timeDelay)) {
 //            robot.clawRotationServo.setPosition(1);
 //            aIsPressed = !aIsPressed;
@@ -65,9 +65,10 @@ public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
 //            robot.clawRotationServo.setPosition(0.8);
 //            elbowServoTime = System.currentTimeMillis();
 //        }
-
 //
-//        // Bucket Motors
+//
+////
+////        // Bucket Motors
 //        if (opMode.gamepad2.left_trigger > 0.1) {
 //                robot.verticalSlideMotor1.setPower(-opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
 //                robot.verticalSlideMotor2.setPower(opMode.gamepad2.left_trigger * linearSlidesUpMultiplier * 1);
@@ -128,23 +129,21 @@ public abstract class SkystoneArmBM extends SkystoneAbstractButtonMap {
 //
 //
 //        // Specimen Claw
-        if (opMode.gamepad2.x && !xIsPressed && ((System.currentTimeMillis() - startTime) > timeDelay)) {
-            xIsPressed = !xIsPressed;
-
-            robot.clawServo.setPosition(0.5);
-            robot.clawServo2.setPosition(-0.5);
-            specimenTime = System.currentTimeMillis();
-
-            opMode.telemetry.addLine("Servo Closed");
-        } else if (opMode.gamepad2.x && xIsPressed && ((System.currentTimeMillis() - specimenTime) > timeDelay)) {
-            xIsPressed = !xIsPressed;
-
-            robot.clawServo.setPosition(1.1);
-            robot.clawServo2.setPosition(-1.1);
-            startTime = System.currentTimeMillis();
-
-            opMode.telemetry.addLine("Servo Open");
-        }
+//        if (opMode.gamepad2.x && !xIsPressed && ((System.currentTimeMillis() - startTime) > timeDelay)) {
+//            xIsPressed = !xIsPressed;
+//            robot.clawServo2.setPosition(-0.5);
+//            robot.clawServo.setPosition(0.5);
+//            specimenTime = System.currentTimeMillis();
+//
+//            opMode.telemetry.addLine("Servo Closed");
+//        } else if (opMode.gamepad2.x && xIsPressed && ((System.currentTimeMillis() - specimenTime) > timeDelay)) {
+//            xIsPressed = !xIsPressed;
+//            robot.clawServo2.setPosition(-1.1);
+//            robot.clawServo.setPosition(1.1);
+//            startTime = System.currentTimeMillis();
+//
+//            opMode.telemetry.addLine("Servo Open");
+//        }
 
         opMode.telemetry.update();
     }
