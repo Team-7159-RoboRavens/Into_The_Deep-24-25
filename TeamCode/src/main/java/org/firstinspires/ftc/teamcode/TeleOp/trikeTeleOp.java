@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
 import org.firstinspires.ftc.teamcode.ComplexRobots.TrikeRobot;
 
 @TeleOp(name="Trike TeleOp")
-public class TrikeTeleOp extends OpMode {
+public class trikeTeleOp extends OpMode {
     //Global Variables
     TrikeRobot robot;
 
