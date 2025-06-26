@@ -18,8 +18,6 @@ public class AngleSideSideBM extends AbstractButtonMap {
     @Override
     public void loop(IntoTheDeepRobot robot, OpMode opMode) {
         mp = new MotorPowers(0);
-        currentMotorPower = .9;
-
 
 
 
