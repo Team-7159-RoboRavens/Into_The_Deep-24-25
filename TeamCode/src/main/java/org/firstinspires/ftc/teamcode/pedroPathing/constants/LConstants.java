@@ -10,12 +10,12 @@ public class LConstants {
         DriveEncoderConstants.strafeTicksToInches = 1;
         DriveEncoderConstants.turnTicksToInches = 1;
 
-        DriveEncoderConstants.robot_Width = 14.1;
-        DriveEncoderConstants.robot_Length = 11.8;
+        DriveEncoderConstants.robot_Width = 16.3;
+        DriveEncoderConstants.robot_Length = 12.5;
 
-        DriveEncoderConstants.leftFrontEncoderDirection = Encoder.FORWARD;
+        DriveEncoderConstants.leftFrontEncoderDirection = Encoder.REVERSE;
         DriveEncoderConstants.rightFrontEncoderDirection = Encoder.FORWARD;
-        DriveEncoderConstants.leftRearEncoderDirection = Encoder.FORWARD;
+        DriveEncoderConstants.leftRearEncoderDirection = Encoder.REVERSE;
         DriveEncoderConstants.rightRearEncoderDirection = Encoder.FORWARD;
 
     }

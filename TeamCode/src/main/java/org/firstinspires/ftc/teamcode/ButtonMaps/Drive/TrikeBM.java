@@ -19,8 +19,10 @@ public class TrikeBM extends TrikeAbstractButtonMap {
 
     private double currentMotorPower;
     private MotorPowers mp;// = new MotorPowers(0);
-    private double timeSince = 0.0;
+    private double timeSince = 0.4;
     private double timeWhen = System.currentTimeMillis();
+    boolean xIsPressed = false;
+
     @Override
     public void loop(TrikeRobot robot, OpMode opMode) {
         mp = new MotorPowers(0);
@@ -60,19 +62,23 @@ public class TrikeBM extends TrikeAbstractButtonMap {
             opMode.telemetry.addLine("Slow Multiplier Active!");
         }
 
-        if(Math.abs(opMode.gamepad1.left_stick_x) > .2 &&  (System.currentTimeMillis() - timeWhen >= 50.0)) {
-            robot.turnServo.setPosition(robot.turnServo.getPosition() + opMode.gamepad1.left_stick_x * .2);
-            opMode.telemetry.addLine("Turn! " + opMode.gamepad1.left_stick_x);
-            opMode.telemetry.addLine("Position of Servo " + robot.turnServo.getPosition());
-        }
+        if(Math.abs(opMode.gamepad1.left_stick_x) > .2 && timeWhen + 50 < System.currentTimeMillis()) {
+           timeSince = opMode.gamepad1.left_stick_x * .20 + .41;
+            timeWhen = System.currentTimeMillis();
 
+        }
         if(opMode.gamepad1.dpad_left) {
-            robot.turnServo.setPosition(1);
+            timeSince = .55;
+        }
+        if(opMode.gamepad1.dpad_up) {
+            timeSince = .41;
         }
         if(opMode.gamepad1.dpad_right) {
-            robot.turnServo.setPosition(1);
+            timeSince = .28;
         }
-
+        robot.turnServo.setPosition(timeSince);
+        opMode.telemetry.addLine("Turn! " + opMode.gamepad1.left_stick_x);
+        opMode.telemetry.addLine("Position of Servo " + robot.turnServo.getPosition());
         mp = new MotorPowers(mp.leftFront);
         opMode.telemetry.update();
         robot.setMotorPowers(mp);
