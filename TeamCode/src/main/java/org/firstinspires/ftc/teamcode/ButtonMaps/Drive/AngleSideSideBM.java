@@ -21,26 +21,26 @@ public class AngleSideSideBM extends AbstractButtonMap {
         mp = new MotorPowers(0);
 //Forward
         if (opMode.gamepad1.y) {
-            mp = new MotorPowers(.7,
+            mp = new MotorPowers(-.7,
                     .7,
-                    .7,
+                    -.7,
                     .7);
             opMode.telemetry.addLine("Trigger Right (forward) active!");
             opMode.telemetry.addData("Trigger Right: ", opMode.gamepad1.y);
 
 //Backward
         } else if (opMode.gamepad1.a) {
-            mp = new MotorPowers(-.7,
+            mp = new MotorPowers(.7,
                     -.7,
-                    -.7,
+                    .7,
                     -.7);
             opMode.telemetry.addLine("Trigger Left (backward) active!");
             opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.a);
 
 //Right
         } else if (opMode.gamepad1.b) {
-            mp = new MotorPowers(-.7,
-                    -.7,
+            mp = new MotorPowers(.7,
+                    .7,
                     .7,
                     .7);
             opMode.telemetry.addLine("Trigger Left (backward) active!");
@@ -48,18 +48,18 @@ public class AngleSideSideBM extends AbstractButtonMap {
 
 //Left
         } else if (opMode.gamepad1.x) {
-            mp = new MotorPowers(.7,
-                    .7,
+            mp = new MotorPowers(-.7,
+                    -.7,
                     -.7,
                     -.7);
             opMode.telemetry.addLine("Trigger Left (backward) active!");
             opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.x);
         }
 
-            if (opMode.gamepad1.left_trigger > 0.1) {
+            if (opMode.gamepad1.left_trigger>0.05) {
                 robot.servo1.setPosition(.7);
 
-            } else if (opMode.gamepad1.right_trigger > 0.1) {
+            } else if (opMode.gamepad1.right_trigger > 0.05) {
                 robot.servo1.setPosition(-0.3);
 
 
