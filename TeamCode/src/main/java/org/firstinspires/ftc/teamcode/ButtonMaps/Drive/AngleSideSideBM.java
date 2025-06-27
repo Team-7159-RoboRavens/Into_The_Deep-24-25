@@ -14,57 +14,59 @@ public class AngleSideSideBM extends AbstractButtonMap {
     //TODO: Change back to private final when done with dash
     private double currentMotorPower;
     private MotorPowers mp;// = new MotorPowers(0);
-    private double triggerMultipler = 0.7;
+    private final double triggerMultipler = 0.7;
 
     @Override
     public void loop(IntoTheDeepRobot robot, OpMode opMode) {
         mp = new MotorPowers(0);
 //Forward
         if (opMode.gamepad1.y) {
-            mp = new MotorPowers(opMode.gamepad1.right_trigger * triggerMultipler,
-                    opMode.gamepad1.right_trigger * triggerMultipler
-                    opMode.gamepad1.right_trigger * triggerMultipler,
-                    opMode.gamepad1.right_trigger * triggerMultipler);
+            mp = new MotorPowers(.7,
+                    .7,
+                    .7,
+                    .7);
             opMode.telemetry.addLine("Trigger Right (forward) active!");
-            opMode.telemetry.addData("Trigger Right: ", opMode.gamepad1.right_trigger);
+            opMode.telemetry.addData("Trigger Right: ", opMode.gamepad1.y);
 
 //Backward
-    } else if (opMode.gamepad1.a ) {
-            mp = new MotorPowers(-opMode.gamepad1.left_trigger * triggerMultipler,
-                    -opMode.gamepad1.left_trigger * triggerMultipler,
-                    -opMode.gamepad1.left_trigger * triggerMultipler,
-                    -opMode.gamepad1.left_trigger * triggerMultipler);
+        } else if (opMode.gamepad1.a) {
+            mp = new MotorPowers(-.7,
+                    -.7,
+                    -.7,
+                    -.7);
             opMode.telemetry.addLine("Trigger Left (backward) active!");
-            opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.left_trigger);
+            opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.a);
 
 //Right
-        } else if (opMode.gamepad1.b ) {
-            mp = new MotorPowers(-opMode.gamepad1.left_trigger * triggerMultipler,
-                    -opMode.gamepad1.left_trigger * triggerMultipler,
-                    opMode.gamepad1.left_trigger * triggerMultipler,
-                    opMode.gamepad1.left_trigger * triggerMultipler);
+        } else if (opMode.gamepad1.b) {
+            mp = new MotorPowers(-.7,
+                    -.7,
+                    .7,
+                    .7);
             opMode.telemetry.addLine("Trigger Left (backward) active!");
-            opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.left_trigger);
+            opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.b);
 
 //Left
-        } else if (opMode.gamepad1.x ) {
-                    mp = new MotorPowers(opMode.gamepad1.left_trigger * triggerMultipler,
-                            opMode.gamepad1.left_trigger * triggerMultipler,
-                            -opMode.gamepad1.left_trigger * triggerMultipler,
-                            -opMode.gamepad1.left_trigger * triggerMultipler);
-                    opMode.telemetry.addLine("Trigger Left (backward) active!");
-                    opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.left_trigger);
+        } else if (opMode.gamepad1.x) {
+            mp = new MotorPowers(.7,
+                    .7,
+                    -.7,
+                    -.7;
+            opMode.telemetry.addLine("Trigger Left (backward) active!");
+            opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.x);
 
 
-            if (opMode.gamepad1.left_trigger>0.1) {
+            if (opMode.gamepad1.left_trigger > 0.1) {
                 robot.servo1.setPosition(.7);
 
-            } else if (opMode.gamepad1.right_trigger>0.1){
+            } else if (opMode.gamepad1.right_trigger > 0.1) {
                 robot.servo1.setPosition(-0.3);
 
 
 
-            opMode.telemetry.update();
+            }
+        }
+        opMode.telemetry.update();
         robot.setMotorPowers(mp);
     }
 }
