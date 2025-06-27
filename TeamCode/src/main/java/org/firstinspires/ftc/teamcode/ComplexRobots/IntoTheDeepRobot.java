@@ -27,7 +27,7 @@ public class IntoTheDeepRobot extends MecanumDrive {
         super(hardwareMap, pose);
         //Linear Slide Motor
 
-        servo1 =  hardwareMap.get(Servo.class, "boxServo");
+        servo1 =  hardwareMap.get(Servo.class, "servo1");
 
         //limelight
         //Initialize Output Servo
