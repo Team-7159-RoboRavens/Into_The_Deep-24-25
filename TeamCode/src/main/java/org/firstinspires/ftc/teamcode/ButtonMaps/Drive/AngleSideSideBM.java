@@ -14,7 +14,7 @@ public class AngleSideSideBM extends AbstractButtonMap {
     //TODO: Change back to private final when done with dash
     private double currentMotorPower;
     private MotorPowers mp;// = new MotorPowers(0);
-    private final double triggerMultipler = 0.7;
+    private double triggerMultipler = 0.7;
 
     @Override
     public void loop(IntoTheDeepRobot robot, OpMode opMode) {
@@ -70,14 +70,12 @@ public class AngleSideSideBM extends AbstractButtonMap {
         }
 
             if (opMode.gamepad1.left_trigger>0.05) {
-                robot.servo1.setPosition(1);
+                triggerMultipler = -1.0;
 
             } else if (opMode.gamepad1.right_trigger > 0.05) {
-                robot.servo1.setPosition(-1);
-
-
-
+                triggerMultipler = 1.0;
             }
+            robot.servo1.setPosition(triggerMultipler);
 
         opMode.telemetry.update();
         robot.setMotorPowers(mp);
