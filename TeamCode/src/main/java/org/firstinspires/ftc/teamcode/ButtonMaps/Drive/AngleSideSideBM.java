@@ -51,10 +51,10 @@ public class AngleSideSideBM extends AbstractButtonMap {
             mp = new MotorPowers(-.7,
                     -.7,
                     -.7,
-                    -.7;
+                    -.7);
             opMode.telemetry.addLine("Trigger Left (backward) active!");
             opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.x);
-
+        }
 
             if (opMode.gamepad1.left_trigger>0.05) {
                 robot.servo1.setPosition(.7);
@@ -65,7 +65,7 @@ public class AngleSideSideBM extends AbstractButtonMap {
 
 
             }
-        }
+
         opMode.telemetry.update();
         robot.setMotorPowers(mp);
     }
