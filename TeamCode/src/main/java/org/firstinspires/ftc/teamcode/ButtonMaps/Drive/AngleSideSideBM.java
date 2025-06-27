@@ -70,10 +70,10 @@ public class AngleSideSideBM extends AbstractButtonMap {
         }
 
             if (opMode.gamepad1.left_trigger>0.05) {
-                robot.servo1.setPosition(.7);
+                robot.servo1.setPosition(1);
 
             } else if (opMode.gamepad1.right_trigger > 0.05) {
-                robot.servo1.setPosition(-0.3);
+                robot.servo1.setPosition(-1);
 
 
 
