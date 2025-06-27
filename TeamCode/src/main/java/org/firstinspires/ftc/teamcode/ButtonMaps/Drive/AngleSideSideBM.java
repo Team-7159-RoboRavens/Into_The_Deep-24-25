@@ -20,7 +20,7 @@ public class AngleSideSideBM extends AbstractButtonMap {
     public void loop(IntoTheDeepRobot robot, OpMode opMode) {
         mp = new MotorPowers(0);
 //Forward
-        if (opMode.gamepad1.y) {
+        if (opMode.gamepad1.dpad_right) {
             mp = new MotorPowers(-.7,
                     .7,
                     -.7,
@@ -29,14 +29,27 @@ public class AngleSideSideBM extends AbstractButtonMap {
             opMode.telemetry.addData("Trigger Right: ", opMode.gamepad1.y);
 
 //Backward
-        } else if (opMode.gamepad1.a) {
+        } else if (opMode.gamepad1.dpad_left) {
             mp = new MotorPowers(.7,
                     -.7,
                     .7,
                     -.7);
             opMode.telemetry.addLine("Trigger Left (backward) active!");
             opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.a);
-
+        } else if (opMode.gamepad1.y) {
+            mp = new MotorPowers(.7,
+                    -.7,
+                    -.7,
+                    .7);
+            opMode.telemetry.addLine("Trigger Left (backward) active!");
+            opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.a);
+        } else if (opMode.gamepad1.a) {
+            mp = new MotorPowers(-.7,
+                    .7,
+                    .7,
+                    -.7);
+            opMode.telemetry.addLine("Trigger Left (backward) active!");
+            opMode.telemetry.addData("Trigger left: ", opMode.gamepad1.a);
 //Right
         } else if (opMode.gamepad1.b) {
             mp = new MotorPowers(.7,
