@@ -99,7 +99,7 @@ public class ParallelPlatesBM extends AbstractButtonMap {
 //Servo (up)
 
         if (opMode.gamepad1.right_bumper) {
-            robot.servo1.setPosition(1);
+            robot.servo1.setPosition(.3);
             opMode.telemetry.addLine("Servo Is up!");
         }
 
