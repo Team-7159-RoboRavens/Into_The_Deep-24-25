@@ -31,12 +31,12 @@ public class PeoplesRepublicofOfirSBM extends AbstractButtonMap {
 
 //left_strafe
         if (opMode.gamepad1.dpad_left){
-            mp=new MotorPowers(-0.4, 0.4, 0.4, -0.4);
+            mp=new MotorPowers(-0.6, 0.6, 0.6, -0.6);
         }
 
 //right_strafe
         if (opMode.gamepad1.dpad_right){
-            mp=new MotorPowers(0.4, -0.4, -0.4, 0.4);
+            mp=new MotorPowers(0.6, -0.6, -0.6, 0.6);
         }
 
 //Turn Right
@@ -62,7 +62,7 @@ public class PeoplesRepublicofOfirSBM extends AbstractButtonMap {
 //Open claw
 
         if (opMode.gamepad1.a) {
-            robot.servo1.setPosition(0);
+            robot.servo1.setPosition(.7);
         }
 
 //close claw
@@ -70,10 +70,13 @@ public class PeoplesRepublicofOfirSBM extends AbstractButtonMap {
             robot.servo1.setPosition(1);
 
         }
-        mp = new MotorPowers(mp.leftFront,
-                mp.rightFront,
+
+
+        //Reverse if needed
+        mp = new MotorPowers(-mp.leftFront,
+                -mp.rightFront,
                 mp.leftBack,
-                mp.rightBack);
+                -mp.rightBack);
 
 
 
