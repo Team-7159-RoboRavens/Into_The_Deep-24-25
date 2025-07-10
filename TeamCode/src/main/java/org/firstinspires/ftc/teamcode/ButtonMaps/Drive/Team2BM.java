@@ -12,16 +12,15 @@ public class Team2BM extends AbstractButtonMap {
 
     private double currentMotorPower;
     private MotorPowers mp;// = new MotorPowers(0);
-    double triggerMultiplier = 0.8;
 
     @Override
     public void loop(IntoTheDeepRobot robot, OpMode opMode) {
         mp = new MotorPowers(0);
-        double servoPosition = 0;
+        double servoPosition = 0.0;
         double triggerMultiplier = 0.75;
 
 //forward
-        if(opMode.gamepad1.dpad_up){
+        if (opMode.gamepad1.dpad_up) {
             mp = new MotorPowers(0.75,
                     0.75,
                     0.75,
@@ -30,62 +29,65 @@ public class Team2BM extends AbstractButtonMap {
         }
 
 //backward
-        else if(opMode.gamepad1.dpad_down){
-            mp=new MotorPowers(-0.75,
+        else if (opMode.gamepad1.dpad_down) {
+            mp = new MotorPowers(-0.75,
                     -0.75,
                     -0.75,
                     -0.75);
-                    opMode.telemetry.addLine("(backward) active");
+            opMode.telemetry.addLine("(backward) active");
         }
 
 //left
-        else if(opMode.gamepad1.dpad_left){
-            mp=new MotorPowers(-0.75,
+        else if (opMode.gamepad1.dpad_left) {
+            mp = new MotorPowers(-0.75,
                     0.75,
                     -0.75,
                     0.75);
-                    opMode.telemetry.addLine("left active");
+            opMode.telemetry.addLine("left active");
         }
 
 //right
-        else if(opMode.gamepad1.dpad_right){
-            mp=new MotorPowers(0.75,
+        else if (opMode.gamepad1.dpad_right) {
+            mp = new MotorPowers(0.75,
                     -0.75,
                     0.75,
                     -0.75);
-                    opMode.telemetry.addLine("(right) active");
+            opMode.telemetry.addLine("(right) active");
         }
 
 //right turn
-        else if(opMode.gamepad1.right_stick_x>0.1) {
-            mp = new MotorPowers(opMode.gamepad1.right_stick_x * triggerMultiplier,
-                    -opMode.gamepad1.right_stick_x * triggerMultiplier,
-                    opMode.gamepad1.right_stick_x * triggerMultiplier,
-                    -opMode.gamepad1.right_stick_x * triggerMultiplier);
+        else if (opMode.gamepad1.right_stick_x > 0.1) {
+            mp = new MotorPowers(opMode.gamepad1.right_stick_x,
+                    -opMode.gamepad1.right_stick_x,
+                    opMode.gamepad1.right_stick_x,
+                    -opMode.gamepad1.right_stick_x);
             opMode.telemetry.addLine(" (right turn)active");
         }
 //left turn
-            else if (opMode.gamepad1.right_stick_x<-0.1) {
-            mp = new MotorPowers(-opMode.gamepad1.right_stick_x * triggerMultiplier,
-                    opMode.gamepad1.right_stick_x * triggerMultiplier,
-                    -opMode.gamepad1.right_stick_x * triggerMultiplier,
-                    opMode.gamepad1.right_stick_x * triggerMultiplier);
+        else if (opMode.gamepad1.right_stick_x < -0.1) {
+            mp = new MotorPowers(-opMode.gamepad1.right_stick_x,
+                    opMode.gamepad1.right_stick_x,
+                    -opMode.gamepad1.right_stick_x,
+                    opMode.gamepad1.right_stick_x);
             opMode.telemetry.addLine("(left turn)active");
         }
 //servo open
-                if (opMode.gamepad1.right_trigger >0.1){
-                    servoPosition =0.4;}
+        if (opMode.gamepad1.right_trigger > 0.1) {
+            servoPosition = 0.4;
+        }
 
 //Servo close
-              else  if (opMode.gamepad1.left_trigger >0.1){
-                    servoPosition =0.1;}
+        else if (opMode.gamepad1.left_trigger > 0.1) {
+            servoPosition = 0.1;
+        }
+        mp = new MotorPowers(mp.leftFront, mp.rightFront, mp.leftBack, mp.rightBack);
 
-                robot.servo1.setPosition(servoPosition);
+        robot.servo1.setPosition(servoPosition);
 
 
+        opMode.telemetry.update();
 
 
-                opMode.telemetry.update();
         robot.setMotorPowers(mp);
-    }
+}
 }
