@@ -17,10 +17,75 @@ public class Team2BM extends AbstractButtonMap {
     @Override
     public void loop(IntoTheDeepRobot robot, OpMode opMode) {
         mp = new MotorPowers(0);
+        double servoPosition = 0;
+        double triggerMultiplier = 0.75;
+
+//forward
+        if(opMode.gamepad1.dpad_up){
+            mp = new MotorPowers(0.75,
+                    0.75,
+                    0.75,
+                    0.75);
+            opMode.telemetry.addLine("(forward) active");
+        }
+
+//backward
+        else if(opMode.gamepad1.dpad_down){
+            mp=new MotorPowers(-0.75,
+                    -0.75,
+                    -0.75,
+                    -0.75);
+                    opMode.telemetry.addLine("(backward) active");
+        }
+
+//left
+        else if(opMode.gamepad1.dpad_left){
+            mp=new MotorPowers(-0.75,
+                    0.75,
+                    -0.75,
+                    0.75);
+                    opMode.telemetry.addLine("left active");
+        }
+
+//right
+        else if(opMode.gamepad1.dpad_right){
+            mp=new MotorPowers(0.75,
+                    -0.75,
+                    0.75,
+                    -0.75);
+                    opMode.telemetry.addLine("(right) active");
+        }
+
+//right turn
+        else if(opMode.gamepad1.right_stick_x>0.1) {
+            mp = new MotorPowers(opMode.gamepad1.right_stick_x * triggerMultiplier,
+                    -opMode.gamepad1.right_stick_x * triggerMultiplier,
+                    opMode.gamepad1.right_stick_x * triggerMultiplier,
+                    -opMode.gamepad1.right_stick_x * triggerMultiplier);
+            opMode.telemetry.addLine(" (right turn)active");
+        }
+//left turn
+            else if (opMode.gamepad1.right_stick_x<-0.1) {
+            mp = new MotorPowers(-opMode.gamepad1.right_stick_x * triggerMultiplier,
+                    opMode.gamepad1.right_stick_x * triggerMultiplier,
+                    -opMode.gamepad1.right_stick_x * triggerMultiplier,
+                    opMode.gamepad1.right_stick_x * triggerMultiplier);
+            opMode.telemetry.addLine("(left turn)active");
+        }
+//servo open
+                if (opMode.gamepad1.right_trigger >0.1){
+                    servoPosition =0.4;}
+
+//Servo close
+              else  if (opMode.gamepad1.left_trigger >0.1){
+                    servoPosition =0.1;}
+
+                robot.servo1.setPosition(servoPosition);
 
 
 
-        opMode.telemetry.update();
+
+                opMode.telemetry.update();
         robot.setMotorPowers(mp);
     }
 }
