@@ -99,6 +99,7 @@ public class LocalizationTest extends OpMode {
     public void loop() {
         poseUpdater.update();
         dashboardPoseTracker.update();
+        telemetryA.addLine("encoders:" + leftFront.getCurrentPosition() + " " + rightFront.getCurrentPosition() + " " + leftRear.getCurrentPosition() + " " + rightRear.getCurrentPosition() + " ");
 
         double y = -gamepad1.left_stick_y; // Remember, this is reversed!
         double x = gamepad1.left_stick_x; // this is strafing

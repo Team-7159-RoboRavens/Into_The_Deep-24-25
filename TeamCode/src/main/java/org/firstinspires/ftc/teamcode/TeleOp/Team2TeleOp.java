@@ -5,14 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.ButtonMaps.AbstractButtonMap;
-import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.AngleSideSideBM;
-import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.SkystoneDriveBM;
-import org.firstinspires.ftc.teamcode.ButtonMaps.SkystoneAbstractButtonMap;
+import org.firstinspires.ftc.teamcode.ButtonMaps.Drive.Team2BM;
 import org.firstinspires.ftc.teamcode.ComplexRobots.IntoTheDeepRobot;
-import org.firstinspires.ftc.teamcode.ComplexRobots.SkystoneRobot;
 
-@TeleOp(name="Angle Side Side TeleOp")
-public class AngleSideSideTeleOp extends OpMode {
+@TeleOp(name="Team2TeleOp")
+public class Team2TeleOp extends OpMode {
     //Global Variables
     IntoTheDeepRobot robot;
 
@@ -23,7 +20,7 @@ public class AngleSideSideTeleOp extends OpMode {
         telemetry.addLine("Initializing, please wait...");
         telemetry.update();
         robot = new IntoTheDeepRobot(hardwareMap, new Pose2d(0,0,0));
-        driveButtonMap = new AngleSideSideBM();
+        driveButtonMap = new Team2BM();
         telemetry.addLine("Ready.");
         telemetry.update();
     }

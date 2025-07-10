@@ -63,12 +63,12 @@ public class TrikeBM extends TrikeAbstractButtonMap {
         }
 
         if(Math.abs(opMode.gamepad1.left_stick_x) > .2 && timeWhen + 50 < System.currentTimeMillis()) {
-           timeSince = opMode.gamepad1.left_stick_x * .20 + .41;
+           timeSince = -opMode.gamepad1.left_stick_x * .20 + .41;
             timeWhen = System.currentTimeMillis();
 
         }
         if(opMode.gamepad1.dpad_left) {
-            timeSince = .55;
+            timeSince = .6;
         }
         if(opMode.gamepad1.dpad_up) {
             timeSince = .41;
