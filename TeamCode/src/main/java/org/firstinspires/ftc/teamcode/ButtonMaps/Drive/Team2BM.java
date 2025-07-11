@@ -73,17 +73,18 @@ public class Team2BM extends AbstractButtonMap {
         }
 //servo open
         if (opMode.gamepad1.right_trigger > 0.1) {
-            robot.servo1.setPosition(1);
+            servoPosition = 1;
 
         }
 
 //Servo close
         else if (opMode.gamepad1.left_trigger > 0.1) {
 
-            robot.servo1.setPosition(-1);
+            servoPosition = -1;
 
         }
         mp = new MotorPowers(mp.leftFront, mp.rightFront, mp.leftBack, mp.rightBack);
+        robot.servo1.setPosition(servoPosition);
 
         opMode.telemetry.update();
 
