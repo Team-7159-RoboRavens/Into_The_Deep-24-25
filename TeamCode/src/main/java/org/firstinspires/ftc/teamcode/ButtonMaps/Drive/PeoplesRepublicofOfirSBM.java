@@ -22,6 +22,7 @@ public class PeoplesRepublicofOfirSBM extends AbstractButtonMap {
 //forwards
         if (opMode.gamepad1.dpad_up){
             mp=new MotorPowers(0.8, 0.8, 0.8, 0.8);
+
         }
 
 //backwards
@@ -31,29 +32,38 @@ public class PeoplesRepublicofOfirSBM extends AbstractButtonMap {
 
 //left_strafe
         if (opMode.gamepad1.dpad_left){
-            mp=new MotorPowers(-0.6, 0.6, 0.6, -0.6);
+            mp=new MotorPowers(-1, 1, 1, -1);
         }
 
 //right_strafe
         if (opMode.gamepad1.dpad_right){
-            mp=new MotorPowers(0.6, -0.6, -0.6, 0.6);
+            mp=new MotorPowers(1, -1, -1, 1);
         }
 
-//Turn Right
+        //Joystick Turning (left and right)
+        if (opMode.gamepad1.right_stick_x > .1 || opMode.gamepad1.right_stick_x < .1) {
+            mp = new MotorPowers(opMode.gamepad1.right_stick_x,
+                    -opMode.gamepad1.right_stick_x,
+                    opMode.gamepad1.right_stick_x,
+                    -opMode.gamepad1.right_stick_x);
+        }
+
+
+//Backward
         if (opMode.gamepad1.right_trigger > 0.1) {
-            mp = new MotorPowers(opMode.gamepad1.right_trigger,
+            mp = new MotorPowers(-opMode.gamepad1.right_trigger,
                     -opMode.gamepad1.right_trigger,
-                    opMode.gamepad1.right_trigger,
+                    -opMode.gamepad1.right_trigger,
                     -opMode.gamepad1.right_trigger);
             opMode.telemetry.addLine("Trigger Right (forward) active!");
             opMode.telemetry.addData("Trigger Right:", opMode.gamepad1.right_trigger);
         }
 
-//Turn Left
+//Forward
         if (opMode.gamepad1.left_trigger > 0.1) {
-            mp = new MotorPowers(-opMode.gamepad1.left_trigger,
+            mp = new MotorPowers(opMode.gamepad1.left_trigger,
                     opMode.gamepad1.left_trigger,
-                    -opMode.gamepad1.left_trigger,
+                    opMode.gamepad1.left_trigger,
                     opMode.gamepad1.left_trigger);
             opMode.telemetry.addLine("Trigger Left (left turn) active!");
         }
@@ -73,10 +83,10 @@ public class PeoplesRepublicofOfirSBM extends AbstractButtonMap {
 
 
         //Reverse if needed
-        mp = new MotorPowers(-mp.leftFront,
-                -mp.rightFront,
-                mp.leftBack,
-                -mp.rightBack);
+        mp = new MotorPowers(-mp.leftFront*1.2,
+                -mp.rightFront*1.2,
+                mp.leftBack*1.2,
+                -mp.rightBack*1.2);
 
 
 
