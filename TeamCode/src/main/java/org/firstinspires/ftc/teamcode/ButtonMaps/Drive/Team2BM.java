@@ -21,19 +21,19 @@ public class Team2BM extends AbstractButtonMap {
 
 //forward
         if (opMode.gamepad1.dpad_up) {
-            mp = new MotorPowers(0.75,
-                    0.75,
-                    0.75,
-                    0.75);
+            mp = new MotorPowers(-0.75,
+                    -0.75,
+                    -0.75,
+                    -0.75);
             opMode.telemetry.addLine("(forward) active");
         }
 
 //backward
         else if (opMode.gamepad1.dpad_down) {
-            mp = new MotorPowers(-0.75,
-                    -0.75,
-                    -0.75,
-                    -0.75);
+            mp = new MotorPowers(0.75,
+                    0.75,
+                    0.75,
+                    0.75);
             opMode.telemetry.addLine("(backward) active");
         }
 
@@ -42,7 +42,7 @@ public class Team2BM extends AbstractButtonMap {
             mp = new MotorPowers(-0.75,
                     0.75,
                     -0.75,
-                    0.75);
+                    -0.75);
             opMode.telemetry.addLine("left active");
         }
 
@@ -51,7 +51,7 @@ public class Team2BM extends AbstractButtonMap {
             mp = new MotorPowers(0.75,
                     -0.75,
                     0.75,
-                    -0.75);
+                    0.75);
             opMode.telemetry.addLine("(right) active");
         }
 
@@ -73,20 +73,16 @@ public class Team2BM extends AbstractButtonMap {
         }
 //servo open
         if (opMode.gamepad1.right_trigger > 0.1) {
-            servoPosition = 0.4;
+            robot.servo1.setPosition(1);
         }
 
 //Servo close
         else if (opMode.gamepad1.left_trigger > 0.1) {
-            servoPosition = 0.1;
+            robot.servo1.setPosition(-1);
         }
         mp = new MotorPowers(mp.leftFront, mp.rightFront, mp.leftBack, mp.rightBack);
 
-        robot.servo1.setPosition(servoPosition);
-
-
         opMode.telemetry.update();
-
 
         robot.setMotorPowers(mp);
 }
