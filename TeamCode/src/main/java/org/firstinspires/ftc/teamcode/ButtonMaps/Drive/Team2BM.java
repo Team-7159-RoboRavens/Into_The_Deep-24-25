@@ -18,6 +18,7 @@ public class Team2BM extends AbstractButtonMap {
         mp = new MotorPowers(0);
         double servoPosition = 0.0;
         double triggerMultiplier = 0.75;
+        boolean triggerIsPressed = false;
 
 //forward
         if (opMode.gamepad1.dpad_up) {
@@ -42,7 +43,7 @@ public class Team2BM extends AbstractButtonMap {
             mp = new MotorPowers(0.75,
                     0.75,
                     -0.75,
-                    -0.75);
+                    -0.8);
             opMode.telemetry.addLine("left active");
         }
 
@@ -51,7 +52,7 @@ public class Team2BM extends AbstractButtonMap {
             mp = new MotorPowers(-0.75,
                     -0.75,
                     0.75,
-                    0.75);
+                    0.8);
             opMode.telemetry.addLine("(right) active");
         }
 
@@ -65,23 +66,22 @@ public class Team2BM extends AbstractButtonMap {
         }
 //left turn
         else if (opMode.gamepad1.right_stick_x < -0.1) {
-            mp = new MotorPowers(-opMode.gamepad1.right_stick_x,
-                    opMode.gamepad1.right_stick_x,
+            mp = new MotorPowers(opMode.gamepad1.right_stick_x,
                     -opMode.gamepad1.right_stick_x,
-                    opMode.gamepad1.right_stick_x);
+                    opMode.gamepad1.right_stick_x,
+                    -opMode.gamepad1.right_stick_x);
             opMode.telemetry.addLine("(left turn)active");
         }
 //servo open
-        if (opMode.gamepad1.right_trigger > 0.1) {
+        if (opMode.gamepad1.right_trigger > 0.1 && triggerIsPressed) {
             servoPosition = 1;
-
+            triggerIsPressed = !triggerIsPressed;
         }
 
 //Servo close
-        else if (opMode.gamepad1.left_trigger > 0.1) {
-
+        else if (opMode.gamepad1.left_trigger > 0.1 && triggerIsPressed) {
             servoPosition = -1;
-
+            triggerIsPressed = !triggerIsPressed;
         }
         mp = new MotorPowers(mp.leftFront, mp.rightFront, mp.leftBack, mp.rightBack);
         robot.servo1.setPosition(servoPosition);
