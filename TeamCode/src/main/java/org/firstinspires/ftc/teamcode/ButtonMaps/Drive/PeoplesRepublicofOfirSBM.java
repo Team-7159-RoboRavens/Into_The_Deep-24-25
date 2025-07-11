@@ -41,20 +41,20 @@ public class PeoplesRepublicofOfirSBM extends AbstractButtonMap {
 
 //Backward
         if (opMode.gamepad1.right_trigger > 0.1) {
-            mp = new MotorPowers(opMode.gamepad1.right_trigger,
-                    opMode.gamepad1.right_trigger,
-                    opMode.gamepad1.right_trigger,
-                    opMode.gamepad1.right_trigger);
+            mp = new MotorPowers(-opMode.gamepad1.right_trigger,
+                    -opMode.gamepad1.right_trigger,
+                    -opMode.gamepad1.right_trigger,
+                    -opMode.gamepad1.right_trigger);
             opMode.telemetry.addLine("Trigger Right (forward) active!");
             opMode.telemetry.addData("Trigger Right:", opMode.gamepad1.right_trigger);
         }
 
 //Forward
         if (opMode.gamepad1.left_trigger > 0.1) {
-            mp = new MotorPowers(-opMode.gamepad1.left_trigger,
-                    -opMode.gamepad1.left_trigger,
-                    -opMode.gamepad1.left_trigger,
-                    -opMode.gamepad1.left_trigger);
+            mp = new MotorPowers(opMode.gamepad1.left_trigger,
+                    opMode.gamepad1.left_trigger,
+                    opMode.gamepad1.left_trigger,
+                    opMode.gamepad1.left_trigger);
             opMode.telemetry.addLine("Trigger Left (left turn) active!");
         }
 
