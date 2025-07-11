@@ -58,18 +58,18 @@ public class Team2BM extends AbstractButtonMap {
 
 //right turn
         else if (opMode.gamepad1.right_stick_x > 0.1) {
-            mp = new MotorPowers(opMode.gamepad1.right_stick_x,
-                    -opMode.gamepad1.right_stick_x,
+            mp = new MotorPowers(-opMode.gamepad1.right_stick_x,
                     opMode.gamepad1.right_stick_x,
-                    -opMode.gamepad1.right_stick_x);
+                    -opMode.gamepad1.right_stick_x,
+                    opMode.gamepad1.right_stick_x);
             opMode.telemetry.addLine(" (right turn)active");
         }
 //left turn
         else if (opMode.gamepad1.right_stick_x < -0.1) {
-            mp = new MotorPowers(opMode.gamepad1.right_stick_x,
-                    -opMode.gamepad1.right_stick_x,
+            mp = new MotorPowers(-opMode.gamepad1.right_stick_x,
                     opMode.gamepad1.right_stick_x,
-                    -opMode.gamepad1.right_stick_x);
+                    -opMode.gamepad1.right_stick_x,
+                    opMode.gamepad1.right_stick_x);
             opMode.telemetry.addLine("(left turn)active");
         }
 //servo open
